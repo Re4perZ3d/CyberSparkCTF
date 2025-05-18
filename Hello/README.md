@@ -1,7 +1,6 @@
 ## Challenge Description
 
 > "Oh no, I lost my PDF! But I remember having a conversation with my friend Kakarot — can you sniff it out?"
-> 
 
 This challenge introduces participants to fundamental network forensics and password cracking. The goal is to recover an encrypted PDF shared over FTP and extract a hidden flag. Key skills include packet analysis, file extraction, AES decryption, and PDF password cracking.
 
@@ -13,18 +12,17 @@ This challenge introduces participants to fundamental network forensics and pass
 
 Open the provided `.pcap` file using **Wireshark**. Navigate to:
 
-![Screenshot_1555.png](attachment:f595e0d0-351b-41a5-96b8-c109496f646a:Screenshot_1555.png)
+![TCP Stream Selection](./Screenshot_1555.png)
 
 - `Analyze > Follow > TCP Stream`
 - Choose **Stream 0**
 
 Inside this stream, you’ll find a message:
 
-![Screenshot_1556.png](attachment:a3b59807-b288-4b84-b579-d44f9e8da0d3:Screenshot_1556.png)
+![TCP Stream Content](./Screenshot_1556.png)
 
-```
+```text
 Re4perZ3d: hey my friend kakarot i will send you the pdf over 21, it...s encrypted with AES-256 i used this command: openssl enc -aes-256-cbc -salt -in protected.pdf -out protected.enc -pass pass:password123
-
 ```
 
 This provides two hints:
@@ -39,14 +37,14 @@ This provides two hints:
 Go to:
 
 - `File > Export Objects > FTP`
-    
-    ![Screenshot_1557.png](attachment:7eb27a39-e027-453b-b60f-965368a42a24:Screenshot_1557.png)
-    
+
+![Export FTP](./Screenshot_1557.png)
+
 - Locate and export the file named something like `protected.enc`
 
 Save it locally.
 
-![Screenshot_1558.png](attachment:ecab5aea-4e08-4e51-8b14-bca5fcb2c131:Screenshot_1558.png)
+![Exported File](./Screenshot_1558.png)
 
 ---
 
@@ -54,11 +52,15 @@ Save it locally.
 
 Use the decryption command (as hinted in the chat):
 
-![Screenshot_1559.png](attachment:b48ce72e-a954-4781-b97b-be9ed7b0926d:Screenshot_1559.png)
+```bash
+openssl enc -aes-256-cbc -salt -d -in protected.enc -out protected.pdf -pass pass:password123
+```
+
+![Decryption Step](./Screenshot_1559.png)
 
 You’ll get a file named `protected.pdf`, but it’s **still password-protected**.
 
-![Screenshot_1560.png](attachment:2a15f64e-2425-4a2a-b6be-273c230e0dd1:Screenshot_1560.png)
+![Protected PDF](./Screenshot_1560.png)
 
 ---
 
@@ -70,33 +72,29 @@ Now, we’ll use **John the Ripper** to crack the PDF's password.
 
 ```bash
 pdf2john protected.pdf > hash.txt
-
 ```
 
 **Crack the hash using a wordlist (like rockyou):**
 
 ```bash
 john -wordlist=/usr/share/wordlists/rockyou.txt hash.txt
-
 ```
 
 **To see the recovered password:**
 
 ```bash
 john hash.txt --show
-
 ```
 
 Output:
 
-```
+```text
 protected.pdf:computer
-
 ```
 
-The password is: `computer` 
+The password is: `computer`
 
-![Screenshot_1561.png](attachment:dcc0a6e1-5907-46d5-b468-26949e0b6be6:Screenshot_1561.png)
+![Cracked Password](./Screenshot_1561.png)
 
 ---
 
@@ -104,27 +102,25 @@ The password is: `computer`
 
 Open `protected.pdf` using the password `computer`.
 
-![Screenshot_1562.png](attachment:75a83a1c-2503-4066-b0a1-567ad57d3781:Screenshot_1562.png)
+![Flag Inside PDF](./Screenshot_1562.png)
 
 Inside, you’ll find the flag:
 
-```
+```text
 Spark{W3lc0me_To_N3tw0rk_An4lys1s}
-
 ```
 
 ---
 
-## Flag
+## 🏁 Flag
 
-```
+```text
 Spark{W3lc0me_To_N3tw0rk_An4lys1s}
-
 ```
 
 ---
 
-## Skills Learned
+## 📚 Skills Learned
 
 - 📡 **Network Traffic Analysis**: Following TCP streams to uncover conversations and hints in captured packets.
 - 📁 **FTP File Extraction**: Using Wireshark to export transferred files through FTP.
